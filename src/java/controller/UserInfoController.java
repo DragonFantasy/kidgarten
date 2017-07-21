@@ -5,37 +5,36 @@
  */
 package controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.HibernateUtil;
 import org.hibernate.Session;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
  * @author liu
  */
-public class UserInfoController implements Controller
+@Controller
+@RequestMapping("/user/*")
+public class UserInfoController
 {
-    @Override
-    public ModelAndView handleRequest(HttpServletRequest hsr, HttpServletResponse hsr1)
+    @RequestMapping("getUser.do")
+    public @ResponseBody Map<String, Object> getUser(HttpServletRequest hsr, HttpServletResponse hsr1)
     {
-        ModelAndView mv = new ModelAndView("userInfo");
-        String out = "All User Details: ";
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            List result = session.createQuery("from UserInfo").list();
-            mv.addObject("users", result);
-            session.getTransaction().commit();
- 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        mv.addObject("message", out);
-        return mv;
+        Map<String, Object> retMap = new HashMap<String, Object>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        List result = session.createQuery("from UserInfo").list();
+        retMap.put("from", "getUsers.do");
+        retMap.put("data", result);
+        session.getTransaction().commit();
+        return retMap;
     }
     
 }

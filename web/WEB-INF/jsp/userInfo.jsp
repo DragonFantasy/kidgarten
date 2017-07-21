@@ -17,45 +17,58 @@
         <title>db test</title>
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">切换标签</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">调度系统</a>
-            </div>
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li class="active" id="li0">
-                        <a href="#"><span class="fa fa-fw fa-table"></span>数据表</a>
-                    </li>
-                    <li id="li1">
-                        <a href="#"><span class="fa fa-fw fa-bar-chart"></span>统计图</a>
-                    </li>
-                    <li id="li2">
-                        <a href="#"><span class="fa fa-fw fa-cog"></span>设置</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <h1>${message}</h1><br>
-        <table class="table table-bordered table-striped table-hover">
-            <thead><tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Recommand</th>
-            </tr></thead>
-            <c:forEach items="${users}" var="user">
-            <tbody><tr>
-                <td><c:out value="${user.id}"/></td>
-                <td><c:out value="${user.name}"/></td>
-                <td><c:out value="${user.recommand}"/></td>
-            </tr></tbody>
-            </c:forEach>
-        </table>
+        <div class="container-fluid">
+            <h1>${message}</h1><br>
+            <table class="table table-bordered table-striped table-hover" id="user_table">
+                <thead><tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Recommand</th>
+                </tr></thead>
+                
+            </table>
+        </div>
+            
+            
+        <script>
+            $.ajax({
+                data:{},
+                type:"POST",
+                dataType:"json",
+                ContentType:"application/json; charset=utf-8",
+                url:"./user/getUser.do",
+                success:function(data){
+                    for(var i = 0; i < data.length; i++)
+                    {
+                        var body_data = document.createElement("tbody");
+                        var tr_data = document.createElement("tr");
+                        var uid_cell = document.createElement("td");
+                        uid_cell.innerHTML = data[i].uid;
+                        var name_cell = document.createElement("td");
+                        name_cell.innerHTML = data[i].name;
+                        var recommand_cell = document.createElement("td");
+                        recommand_cell.innerHTML = data[i].recommand;
+                        tr_data.appendChild(uid_cell);
+                        tr_data.appendChild(name_cell);
+                        tr_data.appendChild(recommand_cell);
+                        body_data.appendChild(tr_data);
+                        user_table.appendChild(body_data);
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                    var body_data = document.createElement("tbody");
+                    var tr_data = document.createElement("tr");
+                    var uid_cell = document.createElement("td");
+                    var name_cell = document.createElement("td");
+                    var recommand_cell = document.createElement("td");
+                    tr_data.appendChild(uid_cell);
+                    tr_data.appendChild(name_cell);
+                    tr_data.appendChild(recommand_cell);
+                    body_data.appendChild(tr_data);
+                    user_table.appendChild(body_data);
+                }
+            });
+        </script>
     </body>
 </html>
