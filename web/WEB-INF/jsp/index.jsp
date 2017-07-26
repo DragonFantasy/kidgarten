@@ -49,6 +49,6 @@
                 </ul>
             </div>
         </nav>
-        <iframe id="subframe" src="./userInfo.jsp" width="100%" onload="resizeIframe(this)" scrolling="no"/>
+        <iframe id="subframe" src="./userInfo.htm" width="100%" onload="resizeIframe(this)" scrolling="no"/>
     </body>
 </html>
