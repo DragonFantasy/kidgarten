@@ -55,6 +55,7 @@ Contributor(s):
     <property name="c3p0.max_statements">100</property>
     <property name="c3p0.timeout">1000</property>
     <property name="hibernate.show_sql">true</property>
+    <property name="jdbc.fetch_size">50</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     

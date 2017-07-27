@@ -15,6 +15,7 @@ import model.UserInfo;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,20 +24,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
  *
  * @author liu
  */
-@Controller
+@ControllerAdvice
+@RequestMapping("/user")
 public class UserInfoController
 {
     @RequestMapping(value="/getUser", method=RequestMethod.GET)
-    public @ResponseBody UserInfo getUser(HttpServletRequest request, HttpServletResponse response)
+    public @ResponseBody Map getUser(HttpServletRequest request, HttpServletResponse response)
     {
+        HashMap retMap = new HashMap();
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("from user_info where id=?");
-        query.setInteger(0, 0);
-        List result = query.list();
-        UserInfo retInfo = (UserInfo)result.get(0);
+        Query query = session.createQuery("from UserInfo");
+        List<UserInfo> result = query.list();
         session.getTransaction().commit();
-        return retInfo;
+        retMap.put("result", response.getStatus());
+        retMap.put("list_data", result);
+        session.close();
+        return retMap;
     }
     
 }
