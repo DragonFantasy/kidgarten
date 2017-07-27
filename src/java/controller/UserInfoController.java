@@ -32,14 +32,14 @@ public class UserInfoController
     public @ResponseBody Map getUser(HttpServletRequest request, HttpServletResponse response)
     {
         HashMap retMap = new HashMap();
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Query query = session.createQuery("from UserInfo");
         List<UserInfo> result = query.list();
         session.getTransaction().commit();
         retMap.put("result", response.getStatus());
         retMap.put("list_data", result);
-        session.close();
+//        session.close();
         return retMap;
     }
     
