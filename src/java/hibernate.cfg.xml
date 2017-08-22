@@ -59,7 +59,6 @@ Contributor(s):
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    
     <mapping resource="model/UserInfo.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

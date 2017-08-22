@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/user")
 public class UserInfoController
 {
-    @RequestMapping(value="/getUser", method=RequestMethod.GET)
+    @RequestMapping(value="/getUser.do", method=RequestMethod.GET)
     public @ResponseBody Map getUser(HttpServletRequest request, HttpServletResponse response)
     {
         HashMap retMap = new HashMap();
@@ -42,5 +42,4 @@ public class UserInfoController
 //        session.close();
         return retMap;
     }
-    
 }
