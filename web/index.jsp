@@ -10,16 +10,17 @@
         
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="js/font-awesome/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="css/public-css.css" type="text/css">
         <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="./js/bootstrap.min.js"></script>
         
         <title>调度系统</title>
     </head>
 
-    <body class="no-skin" onhashchange="miniSPA.changeUrl();">
+    <body onhashchange="miniSPA.changeUrl();">
         <%@include file="./header.html" %>
         
-        <div id="spa_body" style="width:1920px;height:1000px;">
+        <div id="spa_body">
 	</div>
         
         <%@include file="./footer.html" %>

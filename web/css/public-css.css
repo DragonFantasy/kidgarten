@@ -1,3 +1,17 @@
-footer {
+.footer {
+    background: #7fb414;
+    padding:20px;
+    text-align: center; 
+    font:normal 18px '宋体';
+}
+#spa_body{
+    background: #e5f9bd;
+    margin-top: 50px;
+    padding: 20px;
+}
+.black-bar{
     color: #525050;
+}
+.green-bar{
+    color:#A0E418;
 }

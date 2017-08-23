@@ -34,34 +34,38 @@ miniSPA.changeUrl = function() {          //handle url change
 //run scripts method
 function RunScripts(scripts, now_run, script_txt, callback)
 {
-	if(scripts[now_run].src.length > 0)
-	{
-		miniSPA.ajaxRequest(scripts[now_run].src, 'GET', '', function(status, page){
-			script_txt += page;
-			//recursion
-			if(now_run < scripts.length - 1)
-			{
-				RunScripts(scripts, (now_run + 1), script_txt, callback);
-			}
-			else
-			{
-				callback(script_txt);
-			}
-		});
-	}
-	else
-	{
-		script_txt += scripts[now_run].innerHTML;
-		//recursion
-		if(now_run < scripts.length - 1)
-		{
-			RunScripts(scripts, (now_run + 1), script_txt, callback);
-		}
-		else
-		{
-			callback(script_txt);
-		}
-	}
+    if(scripts == null || scripts.length <= 0)
+    {
+        return;
+    }
+    if(scripts[now_run].src.length > 0)
+    {
+        miniSPA.ajaxRequest(scripts[now_run].src, 'GET', '', function(status, page){
+            script_txt += page;
+            //recursion
+            if(now_run < scripts.length - 1)
+            {
+                    RunScripts(scripts, (now_run + 1), script_txt, callback);
+            }
+            else
+            {
+                    callback(script_txt);
+            }
+        });
+    }
+    else
+    {
+            script_txt += scripts[now_run].innerHTML;
+            //recursion
+            if(now_run < scripts.length - 1)
+            {
+                    RunScripts(scripts, (now_run + 1), script_txt, callback);
+            }
+            else
+            {
+                    callback(script_txt);
+            }
+    }
 }
 
 
